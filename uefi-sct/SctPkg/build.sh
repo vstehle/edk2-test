@@ -22,6 +22,8 @@ function get_build_arch
 	        BUILD_ARCH=ARM;;
 	    aarch64*)
 	        BUILD_ARCH=AARCH64;;
+	    x86_64)
+	        BUILD_ARCH=X64;;
 	    *)
 	        BUILD_ARCH=other;;
 	esac
