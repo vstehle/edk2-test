@@ -40,11 +40,12 @@ NUM_CPUS=$((`getconf _NPROCESSORS_ONLN` + 2))
 make -j"$NUM_CPUS" -C edk2/BaseTools/
 
 # Build the SCT and the shell
-DSC_EXTRA=ShellPkg/ShellPkg.dsc ./SctPkg/build.sh ${TARGET_ARCH} GCC RELEASE -j"$NUM_CPUS"
+DSC_EXTRA='ShellPkg/ShellPkg.dsc MdeModulePkg/MdeModulePkg.dsc' ./SctPkg/build.sh ${TARGET_ARCH} GCC RELEASE -j"$NUM_CPUS"
 
 # Assemble all the files that need to be in the zip file
 mkdir -p ${TARGET_ARCH}_SCT/EFI/BOOT
 cp Build/Shell/RELEASE_GCC5/${TARGET_ARCH}/Shell_EA4BB293-2D7F-4456-A681-1F22F42CD0BC.efi ${TARGET_ARCH}_SCT/EFI/BOOT/${BOOT_IMAGE_NAME}
+cp Build/MdeModule/RELEASE_GCC5/${TARGET_ARCH}/CapsuleApp.efi ${TARGET_ARCH}_SCT/
 
 mkdir -p ${TARGET_ARCH}_SCT/SCT
 cp -r Build/UefiSct/RELEASE_GCC5/SctPackage${TARGET_ARCH}/${TARGET_ARCH}/* ${TARGET_ARCH}_SCT/SCT/
